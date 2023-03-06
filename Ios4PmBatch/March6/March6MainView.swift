@@ -7,7 +7,7 @@
 
 import SwiftUI
 var n1 = 0
-struct March6ClassView: View {
+struct March6MainView: View {
     
     @State var num = 0
     var body: some View{
@@ -32,13 +32,16 @@ struct March6ClassView: View {
                 print("num: \(num)")
             }
             
-           NumbersList()
+            NumbersList(n11: $num)
             
-            
+            Image("box3g")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 300, height: 100)
+                .padding(.top,40)
             
            
-          
-            
+
             
         }
        
@@ -69,30 +72,40 @@ struct MyCustomText: View{
 }
 
 struct NumbersList: View {
+    
+    @Binding var n11:Int
     var body: some View {
-        HStack{
-             MyCustomText(x1: 1)
-             MyCustomText(x1: 2)
-            MyCustomText(x1: 3)
+        
+        VStack {
+            Text("Numbers count: \(n11)")
+            Button("Change: \(n11)"){
+                n11 = n11 + 1;
+            }
+            HStack{
+                 MyCustomText(x1: 1)
+                 MyCustomText(x1: 2)
+                MyCustomText(x1: 3)
+            }
+            HStack{
+                 MyCustomText(x1: 4)
+                 MyCustomText(x1: 5)
+                MyCustomText(x1: 6)
+            }
+            
+            HStack{
+                MyCustomText(x1: 7)
+                 MyCustomText(x1: 8)
+                MyCustomText(x1: 9)
+            }
         }
         
-        HStack{
-             MyCustomText(x1: 4)
-             MyCustomText(x1: 5)
-            MyCustomText(x1: 6)
-        }
-        
-        HStack{
-            MyCustomText(x1: 7)
-             MyCustomText(x1: 8)
-            MyCustomText(x1: 9)
-        }
+       
     }
 }
 
-struct Macrh6ClassView_Previews: PreviewProvider {
+struct Macrh6MainView_Previews: PreviewProvider {
     static var previews: some View {
-      March6ClassView()
+      March6MainView()
     }
 }
 
