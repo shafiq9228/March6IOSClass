@@ -6,27 +6,23 @@
 //
 
 import SwiftUI
-var name = "Shafiq Patel"
+var name = ["Home", "Settings", "Exit", "Open"]
 struct HomeView: View {
-    var markks:Int = 99
+    
     var body: some View {
         ZStack {
-            Color.gray.ignoresSafeArea()
+            Color.white.ignoresSafeArea()
             VStack {
-              
-                HStack{
+                ForEach(0 ..< 5){ x in
+                    HStack {
+                        ForEach(0 ..< 6){ x in
+                            
+                            Text("")
+                                .frame(width: 50, height: 50)
+                                .background(Color.blue)
+                        }
+                    }
                     
-                    Text("")
-                        .frame(width: 200, height: 200)
-                        .background(Color.orange)
-                    
-                    Text("")
-                        .frame(width: 100, height: 100)
-                        .background(Color.blue)
-                    
-                    Text("")
-                        .frame(width: 50, height: 50)
-                        .background(Color.black)
                 }
                 
             }

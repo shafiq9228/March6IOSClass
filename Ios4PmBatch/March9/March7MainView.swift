@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+// march 7 and march 8 file same
+
 let screenWidth = UIScreen.main.bounds.size.width
 
 struct Args{
@@ -17,6 +19,8 @@ struct Args{
 }
 
 struct March7MainView: View {
+    
+    @State var v1 = "0"
     var body: some View {
         ZStack {
             Color.black.ignoresSafeArea()
@@ -24,7 +28,7 @@ struct March7MainView: View {
             VStack{
                 Spacer()
                 
-                Text("0")
+                Text("\(v1)")
                     .padding(.horizontal,15)
                     .frame(width: screenWidth, alignment:.trailing)
                     .foregroundColor(Color.white)
@@ -33,25 +37,25 @@ struct March7MainView: View {
                     
                   
               
-                ButtonsLine(nums: [Args(digit: "AC", fColor: Color.black, bColor: Color.gray),
+                ButtonsLine(v1: $v1,nums: [Args(digit: "AC", fColor: Color.black, bColor: Color.gray),
                                    Args(digit: "+/-", fColor: Color.black, bColor: Color.gray),
                                    Args(digit: "%", fColor: Color.black, bColor: Color.gray),
                                    Args(digit: "/" , bColor: Color.orange)])
                 
-                ButtonsLine(nums: [Args(digit: "7"),
+                ButtonsLine(v1: $v1, nums: [Args(digit: "7"),
                                    Args(digit: "8"),
                                    Args(digit: "9"),
                                    Args(digit: "X", bColor: Color.orange)])
-                ButtonsLine(nums: [Args(digit: "4"),
+                ButtonsLine(v1: $v1,nums: [Args(digit: "4"),
                                    Args(digit: "5"),
                                    Args(digit: "6"),
                                    Args(digit: "-", bColor: Color.orange)])
-                ButtonsLine(nums: [Args(digit: "1"),
+                ButtonsLine(v1: $v1,nums: [Args(digit: "1"),
                                    Args(digit: "2"),
                                    Args(digit: "3"),
                                    Args(digit: "+", bColor: Color.orange)])
                 
-                ButtonsLine(nums: [Args(digit: "0"),
+                ButtonsLine(v1: $v1,nums: [Args(digit: "0"),
                                    Args(digit: "."),
                                    Args(digit: "=", bColor: Color.orange)])
                
@@ -61,10 +65,39 @@ struct March7MainView: View {
 }
 
 struct MyButton1: View {
+    @Binding var v1:String
     let arg:Args
     var body: some View {
         
             Button {
+                
+                var list1 = ["0"]
+                
+                for x in 1..<10 {
+                    
+                    list1.append("\(x)")
+                    
+                }
+                list1.append(".")
+                list1.append("/")
+                list1.append("+")
+                list1.append("-")
+                list1.append("X")
+                
+                if list1.contains("\(arg.digit)"){
+                    
+                    if(v1 == "0"){
+                        v1 = ""
+                        if(arg.digit == "."){
+                            v1 = "0"
+                        }
+                    }
+                    
+                    v1 = v1 + "\(arg.digit)"
+                } else if(arg.digit == "AC"){
+                    v1 = "0"
+                }
+                //v1 = "\(arg.digit)"
                 print("item digit is \(arg.digit)")
             } label: {
                 Text("\(arg.digit)")
@@ -80,21 +113,20 @@ struct MyButton1: View {
 }
 
 struct ButtonsLine: View {
+    @Binding var v1:String
     let nums:[Args]
     var body: some View {
         
         HStack{
-            MyButton1(arg: nums[0])
-            MyButton1(arg: nums[1])
-            MyButton1(arg: nums[2])
             
-            if(nums.count > 3 ){
-                MyButton1(arg: nums[3])
+            ForEach(0..<nums.count) { num in
+                MyButton1(v1:$v1,arg: nums[num])
+               
             }
            
            
+           
         }
-       
        
     }
 }
