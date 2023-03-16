@@ -6,22 +6,36 @@
 //
 
 import SwiftUI
-var name = ["Home", "Settings", "Exit", "Open"]
+
+
 struct HomeView: View {
     
     var body: some View {
         ZStack {
             Color.white.ignoresSafeArea()
             VStack {
-                ForEach(0 ..< 5){ x in
-                    HStack {
-                        ForEach(0 ..< 6){ x in
-                            
-                            Text("")
-                                .frame(width: 50, height: 50)
-                                .background(Color.blue)
-                        }
+                
+            
+                
+                Button("Click me"){
+                    
+                    var name1:String? = nil
+                     name1 = "shafiq"
+                    
+                    print("\(name1 ?? "No value")") // Method1
+                    
+                    if let x = name1{
+                        print("\(x)")  // Method2
                     }
+                    
+                   print("----")
+                    
+                    
+                    var n1:Int? = nil
+                    
+                   // n1 = 10
+                    
+                    print("\((n1 ?? 0)*2 )")
                     
                 }
                 
