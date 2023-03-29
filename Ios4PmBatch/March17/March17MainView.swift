@@ -9,7 +9,7 @@ import SwiftUI
 
 struct March17MainView: View {
     var body: some View {
-      TabPage()
+     NavPage()
     }
 }
 
